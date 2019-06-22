@@ -11,7 +11,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(cors({
-  origin: 'https://localhost:8081'
+  origin: process.env.BACK_ORIGIN
 }));
 app.use(express.json());
 
@@ -43,5 +43,5 @@ app.use((err, req, res, next) => {
 
 
 //start the server
-const port = app.get('port') || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => { console.log(`listening on ${port}...`) });
