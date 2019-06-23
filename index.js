@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 // error handler function
 app.use((err, req, res, next) => {
 
-    const error = app.get('env') === 'development' ? err : {};
+    const error = process.env.NODE_ENV !== 'production' ? err : {};
     const status = err.status || 500;
 
     //respond to client
@@ -43,5 +43,5 @@ app.use((err, req, res, next) => {
 
 
 //start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 app.listen(port, () => { console.log(`listening on ${port}...`) });

@@ -33,7 +33,7 @@ router.route('/google')
 router.route('/facebook')
   //signin with facebook auth
   .post(
-    passport.authenticate('facebookToken', { session: false }),
+    passport.authenticate('facebookToken', {scope : ['email'], session: false }),
     authController.facebookOAuth
   );
 

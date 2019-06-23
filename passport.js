@@ -65,7 +65,8 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 //Facebook Strategy
 passport.use('facebookToken', new FacebookTokenStrategy({
   clientID: config.oauth.facebook.clientID,
-  clientSecret: config.oauth.facebook.clientSecret
+  clientSecret: config.oauth.facebook.clientSecret,
+  profileFields: ['id', 'displayName', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     console.log('profile', profile);
