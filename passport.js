@@ -52,7 +52,8 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
       google: {
         id: profile.id,
         email: profile.emails[0].value
-      }
+      },
+      name: profile.displayName
     });
 
     await newUser.save();
@@ -65,13 +66,12 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 //Facebook Strategy
 passport.use('facebookToken', new FacebookTokenStrategy({
   clientID: config.oauth.facebook.clientID,
-  clientSecret: config.oauth.facebook.clientSecret,
-  profileFields: ['id', 'displayName', 'email']
+  clientSecret: config.oauth.facebook.clientSecret
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     console.log('profile', profile);
-    console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
+  //  console.log('accessToken', accessToken);
+  //  console.log('refreshToken', refreshToken);
 
     const existingUser = await User.findOne({ "facebook.id": profile.id });
     if (existingUser) {
@@ -83,7 +83,8 @@ passport.use('facebookToken', new FacebookTokenStrategy({
       facebook: {
         id: profile.id,
         email: profile.emails[0].value
-      }
+      },
+      name: profile.displayName
     });
 
     await newUser.save();

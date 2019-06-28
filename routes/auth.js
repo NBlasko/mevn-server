@@ -11,14 +11,14 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 router.route('/signup')
   // sign up with email
   .post(
-    validateBody(schemas.authSchema),
+    validateBody(schemas.signUpSchema),
     authController.signUp
   );
 
 router.route('/signin')
   // signin with email
   .post(
-    validateBody(schemas.authSchema),
+    validateBody(schemas.signInSchema),
     passportSignIn,
     authController.signIn
   );
@@ -33,7 +33,7 @@ router.route('/google')
 router.route('/facebook')
   //signin with facebook auth
   .post(
-    passport.authenticate('facebookToken', {scope : ['email'], session: false }),
+    passport.authenticate('facebookToken', { session: false }),
     authController.facebookOAuth
   );
 
